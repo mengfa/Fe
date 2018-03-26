@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <input type="text" name="" value="你好">
+    <button id='btn1' type="button" name="button">禁用</button>
+    <button id='btn2' type="button" name="button">解禁</button>
+    <script type="text/javascript">
+      window.onload = function(){
+        var btn1 = document.getElementById('btn1');
+        var btn2 = document.getElementById('btn2');
+        var inp = document.getElementsByTagName('input')[0];
+
+        btn1.onclick = function(){
+          inp.disabled = 'no';
+        }
+        btn2.onclick = function(){
+          inp.disabled = false;
+        }
+
+      }
+    </script>
+  </body>
+</html>

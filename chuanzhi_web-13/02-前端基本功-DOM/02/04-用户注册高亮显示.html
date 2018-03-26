@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .wrong {
+         border: 2px solid red;
+     }
+     .right {
+         border: 2px solid #91B81D;
+     }
+    </style>
+  </head>
+  <body>
+    账号:<input onblur="fn(this)" type="text" name=""> <br><br>
+    密码:<input onblur="fn(this)" type="text" name="">
+
+    <script>
+
+        function fn(aaa){
+          if(aaa.value.length > 6 & aaa.value.length < 12 ){
+            console.log(aaa.value.lenght)
+            aaa.className = 'right';
+          }else {
+            aaa.className = 'wrong';
+          }
+        }
+
+    </script>
+  </body>
+</html>

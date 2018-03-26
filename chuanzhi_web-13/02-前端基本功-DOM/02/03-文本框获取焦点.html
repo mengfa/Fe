@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>03-文本框获取焦点</title>
+  </head>
+  <body>
+    京东:<input id="jd"type="text" name="" value="我是京东">
+    淘宝:<input id='tb' type="text" name="" value="我是淘宝">
+
+
+
+    <script type="text/javascript">
+      window.onload = function(){
+        var jd = document.getElementById('jd');
+        var tb = document.getElementById('tb');
+
+        jd.onfocus = function(){
+          if(jd.value == '我是京东'){
+              jd.value = ''
+
+          }
+        }
+        jd.onblur = function(){
+          if(jd.value == ''){
+              jd.value = '我是京东'
+
+          }
+
+        }
+      }
+    </script>
+  </body>
+</html>
