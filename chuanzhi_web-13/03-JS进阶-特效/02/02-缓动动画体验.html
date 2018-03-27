@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<button>运动到400</button>
+<div></div>
+
+<script>
+
+    var　btn = document.getElementsByTagName("button")[0];
+    var　div = document.getElementsByTagName("div")[0];
+
+    btn.onclick = function(){
+
+      var target = 400;
+
+      var timer = setInterval(function(){
+        div.style.left = div.offsetLeft+(target-div.offsetLeft)/50 +'px';
+
+      },30)
+    }
+
+
+</script>
+
+</body>
+</html>

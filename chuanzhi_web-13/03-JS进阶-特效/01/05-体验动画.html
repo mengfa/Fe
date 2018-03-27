@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .box {
+        height: 100px;
+        width: 100px;
+        background-color: pink;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" name="button">donghua</button>
+    <div class="box" style="left: 0px">
+
+    </div>
+
+
+    <script type="text/javascript">
+      var btn = document.getElementsByTagName('button')[0];
+      var box = document.getElementsByClassName('box')[0];
+      console.log(btn);
+      console.log(box);
+      btn.onclick = function(){
+        console.log('btn');
+        setInterval(function(){
+          console.log('time');
+          console.log('box.style.left'+box.style.left);
+          console.log('box.offsetLeft'+box.offsetLeft);
+          // box.style.left = box.offsetLeft + 10 + 'px';
+          box.style.left = box.offsetLeft + 10 + "px";
+          console.log('box.style.left'+box.style.left);
+        },300);
+      }
+
+
+
+
+
+    </script>
+
+  </body>
+</html>
