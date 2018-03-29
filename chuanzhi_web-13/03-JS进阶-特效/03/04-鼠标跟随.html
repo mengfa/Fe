@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            height: 5000px;
+        }
+        img {
+            position: absolute;
+            padding: 10px 0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/img.jpg" width="100"/>
+
+    <script>
+        var img = document.getElementsByTagName('img')[0];
+        var timer = null;
+        var targetx = 0;
+        var targety = 0;
+        var leaderx = 0;
+        var leadery = 0;
+
+        document.onclick = function(event){
+          event = event || window.event;
+          //鼠标在页面的位置 = 被卷去的部分+可视区域部分。
+            var pagey = event.pageY || scroll().top + event.clientY;
+            var pagex = event.pageX || scroll().left + event.clientX;
+
+            console.log(pagey);
+            console.log(pagex);
+            targety = pagey-img.offsetHeight/2;
+            targetx = pagex-img.offsetWidth/2;
+
+            clearInterval(timer);
+            timer = setInterval(function(){
+              
+
+            },30)
+
+
+        }
+
+    </script>
+
+
+
+</body>
+</html>
