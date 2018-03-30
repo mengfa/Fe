@@ -34,6 +34,68 @@
             position: relative;
         }
     </style>
+    <script src="animate.js"></script>
+    <script type="text/javascript">
+      window.onload = function(){
+        //0.获取相关元素
+           var box = document.getElementsByClassName("box")[0];
+           var small = box.firstElementChild || box.firstChild;
+           var big = box.children[1];
+           var mask = small.children[1];
+           var bigImg = big.children[0];
+
+           //1.鼠标放上去显示盒子，移开隐藏盒子。(为小盒子绑定事件)
+           small.onmouseenter = function () {
+               //封装好方法调用：显示元素
+               show(mask);
+               show(big);
+           }
+           small.onmouseleave = function () {
+               //封装好方法调用：隐藏元素
+               hide(mask);
+               hide(big);
+           }
+           small.onmousemove = function(event){
+             event = event || window.event;
+             var pagex = event.pageX || scroll().left + event.clientX;
+             var pagey = event.pageY || scroll().top + event.clientY;
+
+             //让鼠标在黄盒子最中间，减去黄盒子宽高的一半
+              var x = pagex - box.offsetLeft - mask.offsetWidth/2;
+              var y = pagey - box.offsetTop - mask.offsetHeight/2;
+              if(x<0){
+                    x = 0;
+                }
+                if(x>small.offsetWidth-mask.offsetWidth){
+                    x = small.offsetWidth-mask.offsetWidth;
+                }
+                //top同理。
+                if(y<0){
+                    y = 0;
+                }
+                if(y>small.offsetHeight-mask.offsetHeight){
+                    y = small.offsetHeight-mask.offsetHeight;
+                }
+              console.log(x);
+              console.log(y);
+              mask.style.left = x + "px";
+              mask.style.top = y + "px";
+
+              var bili = bigImg.offsetWidth/small.offsetWidth;
+
+                var xx = bili*x;
+                var yy = bili*y;
+
+
+                bigImg.style.marginTop = -yy+"px";
+                bigImg.style.marginLeft = -xx+"px";
+
+           }
+
+
+      }
+    </script>
+
 </head>
 <body>
 <div class="box">

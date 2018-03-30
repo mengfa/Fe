@@ -39,7 +39,23 @@
 
             clearInterval(timer);
             timer = setInterval(function(){
-              
+              leaderx = img.offsetLeft;
+
+              var stepx = (targetx-leaderx)/10;
+
+              stepx = stepx>0?Math.ceil(stepx):Math.floor(stepx);
+              leaderx = leaderx+stepx;
+
+              img.style.left = leaderx + "px";
+
+              leaderx = img.offsetLeft;
+
+              var stepy = (targety-leadery)/10;
+
+              stepy = stepy>0?Math.ceil(stepy):Math.floor(stepy);
+              leadery = leadery+stepy;
+
+              img.style.top = leadery + "px";
 
             },30)
 
