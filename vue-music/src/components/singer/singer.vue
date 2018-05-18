@@ -1,60 +1,96 @@
 <template>
-  <div class='test'>
-     singer
+  <div class="singer" ref="singer">
+    <list-view  :data="singers" ></list-view>
+    
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+  import ListView from 'base/listview/listview'
+  import {getSingerList} from 'api/singer'
+  import {ERR_OK} from 'api/config'
+  import Singer from 'common/js/singer'
+  // import {mapMutations} from 'vuex'
+  // import {playlistMixin} from 'common/js/mixin'
+
+  const HOT_SINGER_LEN = 10
+  const HOT_NAME = '热门'
+
+  export default {
+    
+    data() {
+      return {
+        singers: []
+      }
+    },
+    created() {
+      this._getSingerList()
+    },
+    methods: {
+      
+      _getSingerList() {
+        getSingerList().then((res) => {
+          if (res.code === ERR_OK) {
+            this.singers = this._normalizeSinger(res.data.list)
+            
+            
+          }
+        })
+      },
+       _normalizeSinger(list) {
+        let map = {
+          hot: {
+            title: HOT_NAME,
+            items: []
+          }
+        }
+        list.forEach((item, index) => {
+          if (index < HOT_SINGER_LEN) {
+            map.hot.items.push(new Singer({
+              name: item.Fsinger_name,
+              id: item.Fsinger_mid
+            }))
+          }
+          const key = item.Findex
+          if (!map[key]) {
+            map[key] = {
+              title: key,
+              items: []
+            }
+          }
+          map[key].items.push(new Singer({
+            name: item.Fsinger_name,
+            id: item.Fsinger_mid
+          }))
+        })
+        // 为了得到有序列表，我们需要处理 map
+        let ret = []
+        let hot = []
+        for (let key in map) {
+          let val = map[key]
+          if (val.title.match(/[a-zA-Z]/)) {
+            ret.push(val)
+          } else if (val.title === HOT_NAME) {
+            hot.push(val)
+          }
+        }
+        ret.sort((a, b) => {
+          return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+        })
+        return hot.concat(ret)
+      }
+      
+  },
+   components: {
+      ListView
+    }
+}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import "~common/stylus/variable"
-  .test
-    color: $color-theme
-  .recommend
+  .singer
     position: fixed
-    width: 100%
     top: 88px
     bottom: 0
-    .recommend-content
-      height: 100%
-      overflow: hidden
-      .slider-wrapper
-        position: relative
-        width: 100%
-        overflow: hidden
-      .recommend-list
-        .list-title
-          height: 65px
-          line-height: 65px
-          text-align: center
-          font-size: $font-size-medium
-          color: $color-theme
-        .item
-          display: flex
-          box-sizing: border-box
-          align-items: center
-          padding: 0 20px 20px 20px
-          .icon
-            flex: 0 0 60px
-            width: 60px
-            padding-right: 20px
-          .text
-            display: flex
-            flex-direction: column
-            justify-content: center
-            flex: 1
-            line-height: 20px
-            overflow: hidden
-            font-size: $font-size-medium
-            .name
-              margin-bottom: 10px
-              color: $color-text
-            .desc
-              color: $color-text-d
-      .loading-container
-        position: absolute
-        width: 100%
-        top: 50%
-        transform: translateY(-50%)
+    width: 100%
 </style>
